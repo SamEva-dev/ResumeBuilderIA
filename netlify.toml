@@ -1,0 +1,20 @@
+[build]
+  command = "bash ./netlify-build.sh"
+  publish = "build/wwwroot"
+
+# SPA fallback
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Cache long pour le runtime Blazor
+[[headers]]
+  for = "/_framework/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/_content/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
